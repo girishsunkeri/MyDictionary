@@ -1,0 +1,31 @@
+<ion-modal-view>
+	<ion-header-bar>
+		<h1 class="title">{{ addAction ? 'Add' : 'Edit' }} word</h1>
+		<div class="buttons">
+			<button class="button button-clear" ng-click="closeAddWordScreen()">Close</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-content>
+		<form>
+			<div class="list">
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Word</span>
+					<input type="text" ng-model="word.Name" placeholder="Word" autofocus>
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Meaning</span>
+					<input type="text" ng-model="word.Meaning" placeholder="Meaning" autofocus>
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Sentence</span>
+					<input type="text" ng-model="word.Sentence" placeholder="Sentence" autofocus>
+				</label>
+				<label class="item">
+					<button class="action-button button icon-left ion-checkmark button-block button-positive" ng-click="addOrEditWord()">Save
+					</button>
+				</label>
+			</div>
+		</form>
+	</ion-content>
+</ion-modal-view>

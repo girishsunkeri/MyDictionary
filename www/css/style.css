@@ -1,0 +1,45 @@
+/* Add word */
+.list-words-content .list-card {
+	border: 1px solid #ddd;
+}
+
+.word-item {
+	padding-bottom: 0;
+	border-color: #fff;
+}
+
+.word-item .name {
+	font-weight: 500;
+	font-size: 25px;
+}
+
+.word-item .meaning {
+	font-size: 20px;
+	line-height: 1.3;
+}
+
+.word-item .sentence {
+	font-size: 16px;
+}
+
+.word-details {
+	background-color: #FBFBFB;
+}
+
+.word-details * {
+	white-space: normal !important;
+	text-overflow: initial !important;
+}
+
+.word-details div{
+	display: inline-block;
+}
+
+.edit-icon-container {
+	float: right;
+}
+
+.edit-icon-container button {
+	font-size: 25px;
+}
+/* Add word end */

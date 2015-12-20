@@ -1,0 +1,22 @@
+<ion-view hide-back-button="true" view-title="ALL WORDS">
+	<ion-nav-buttons side="right">
+		<button class="button button-icon ion-android-add-circle" ng-click="showAddWordScreen(0)">
+		</button>
+	</ion-nav-buttons>
+	<ion-content class="list-words-content">
+		<ion-list class="">
+			<ion-item ng-repeat="word in words" class="word-item">
+				<div class="list-card">
+					<div class="item word-details">
+						<div class="name-container"><h2 class="name">{{word.Name}}</h2></div><!--
+						--><div class="edit-icon-container"><button class="button button-icon ion-edit" ng-click="showActionsheet(word)">
+							</button>
+						</div>
+						<h2 class="meaning">{{word.Meaning}}</h2>
+						<p class="sentence">{{word.Sentence}}</p>
+					</div>
+				</div>
+			</ion-item>
+		</ion-list>
+	<ion-content>
+</ion-view>
