@@ -4,7 +4,11 @@
 	<ion-content class="import-words-content">
 		<ion-list class="">
 			<ion-item>
-				<button class="button button-positive button-block" ng-click="importWords()">Import Words</button>
+				<button class="button button-positive button-block" ng-click="importWordsLocal(false)">Import Words(Text)</button>
+				<button class="button button-positive button-block" ng-click="importWordsLocal(true)">Import Words(JSON)</button>
+
+				<progress max="100" value="{{progressPercent}}"></progress>
+				<label ng-if="totalWordsImported"><span>Total {{ totalWordsImported }} words imported</span></label>
 			</ion-item>
 		</ion-list>
 	<ion-content>

@@ -4,8 +4,9 @@
 		</button>
 	</ion-nav-buttons>
 	<ion-content class="list-words-content">
-		<ion-list class="">
+		<ion-list>
 			<ion-item ng-repeat="word in words" class="word-item">
+				<p ng-if="$index == 0 || word.DateCreated != words[$index - 1].DateCreated">{{word.DateCreated | DateWithFullMonth }}</p>
 				<div class="list-card">
 					<div class="item word-details">
 						<div class="name-container"><h2 class="name">{{word.Name}}</h2></div><!--

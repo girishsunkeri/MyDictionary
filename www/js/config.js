@@ -9,7 +9,9 @@ angular.module('MyDictionary.config', [])
 				{ name: 'Id', type: 'integer primary key' },
 				{ name: 'Name', type: 'text'},
 				{ name: 'Meaning', type: 'text'},
-				{ name: 'Sentence', type: 'text'}
+				{ name: 'Sentence', type: 'text'},
+				{ name: 'DateCreated', type: 'text'},
+				{ name: 'DateUpdated', type: 'text'},
 			]
 		}
 	]
