@@ -44,6 +44,16 @@ myDictionaryModule.run(function($ionicPlatform, DB) {
     }
   })
 
+  .state('app.languages', {
+    url: '/languages',
+    views: {
+      'menuContent' : {
+        templateUrl: 'Words/words_list.html',
+        controller: 'WordCtrl'
+      }
+    }
+  })
+
   .state('app.importFile', {
     url: '/importFile',
     views: {

@@ -8,6 +8,15 @@ appService.factory('Word', function(DB, DictionaryDate){
 			   });
 	};
 
+	self.getByName = function(name){
+		var parameters = [name];
+
+		return DB.query("SELECT Id FROM Word WHERE Name = (?)", parameters)
+			.then(function(result){
+				return DB.getById(result);
+			});
+	};
+
 	self.add = function(word){
 		var dateCreated = DictionaryDate.getCurrentDate(),
 			dateUpdated = dateCreated
@@ -16,6 +25,7 @@ appService.factory('Word', function(DB, DictionaryDate){
 			parameterNames = ['Name', 'Meaning', 'Sentence', 'DateCreated','DateUpdated'];
 
 		return DB.query(DB.getInsertString('Word', parameterNames), parameterValues);
+	
 	};
 
 	self.deleteWord = function(wordId){
