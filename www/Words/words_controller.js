@@ -1,4 +1,4 @@
-myDictionaryModule.controller('WordCtrl', function($scope, Word, $ionicModal, $timeout, $ionicActionSheet, $ionicPopup){
+myDictionaryModule.controller('WordCtrl', function($scope, Word, $ionicModal, $timeout, $ionicActionSheet, $ionicPopup, $stateParams){
 
 	$scope.words = [];
 
@@ -7,7 +7,7 @@ myDictionaryModule.controller('WordCtrl', function($scope, Word, $ionicModal, $t
 
 	// Will fetch words from DB and update the view.
 	$scope.updateWords = function() {
-		Word.all().then(function(words){
+		Word.getWordsByLanguage($stateParams.languageId).then(function(words){
 			$scope.words = words;
 		});
 	};
@@ -15,7 +15,8 @@ myDictionaryModule.controller('WordCtrl', function($scope, Word, $ionicModal, $t
 	// Will perform add or edit based on $scope.addAction parameter
 	$scope.addOrEditWord = function(){
 		console.log("Adding/Editing word")
-
+		
+		$scope.word.LanguageId = $stateParams.languageId;
 		if($scope.addAction){
 			Word.add($scope.word).then(function(){
 				console.log("Word added");
@@ -79,7 +80,8 @@ myDictionaryModule.controller('WordCtrl', function($scope, Word, $ionicModal, $t
 			Id: 0,
 			Name: "",
 			Meaning: "",
-			Sentence: ""
+			Sentence: "",
+			LanguageId: 0
 		};
 	}
 

@@ -1,0 +1,19 @@
+<ion-view hide-back-button="true" view-title="ALL Languages">
+	<ion-nav-buttons side="right">
+		<button class="button button-icon ion-android-add-circle" ng-click="showAddLanguageScreen(0)">
+		</button>
+	</ion-nav-buttons>
+	<ion-content class="list-language-content">
+		<ion-list>
+			<ion-item ng-repeat="language in languages" class="item-language">
+				<div class="language-item-content">
+					<div class="language-name"><a href="#/app/words/{{language.Id}}"> {{language.Name}} </a></div><!--
+					--><div class="language-edit">
+						<button class="button button-icon ion-edit" ng-click="showActionsheet(language)">
+						</button>
+					</div>
+				</div>
+			</ion-item>
+		</ion-list>
+	<ion-content>
+</ion-view>

@@ -1,0 +1,23 @@
+<ion-modal-view>
+	<ion-header-bar>
+		<h1 class="title">{{ addAction ? 'Add' : 'Edit' }} language</h1>
+		<div class="buttons">
+			<button class="button button-clear" ng-click="closeAddLanguageScreen()">Close</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-content>
+		<form>
+			<div class="list">
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Language</span>
+					<input type="text" ng-model="language.Name" placeholder="Language" autofocus>
+				</label>
+				<label class="item">
+					<button class="action-button button icon-left ion-checkmark button-block button-positive" ng-click="addOrEditLanguage()">Save
+					</button>
+				</label>
+			</div>
+		</form>
+	</ion-content>
+</ion-modal-view>

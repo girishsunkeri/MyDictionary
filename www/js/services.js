@@ -1,6 +1,6 @@
 var appService = angular.module('MyDictionary.services', ['MyDictionary.config', 'ngCordova']);
 
-appService.factory('DB', function($q, DB_CONFIG, $cordovaSQLite, $ionicPlatform){
+appService.factory('DB', function($q, DB_CONFIG, $cordovaSQLite, $ionicPlatform, DictionaryDate){
 	var self = this;
 	self.db = null;
 
@@ -22,6 +22,14 @@ appService.factory('DB', function($q, DB_CONFIG, $cordovaSQLite, $ionicPlatform)
 				var query = 'CREATE TABLE IF NOT EXISTS ' + table.name + ' (' + columns.join(',') + ')';
 				self.query(query);
 			});
+
+			// Insert first language as English
+			var dateCreated = DictionaryDate.getCurrentDate(),
+				dateUpdated = dateCreated,
+				parameterValues = ['English', dateCreated, dateUpdated, 'English'];
+
+			self.query("INSERT INTO Language (Name, DateCreated, DateUpdated) SELECT (?),(?),(?) WHERE NOT EXISTS(SELECT 1 FROM Language WHERE Name = (?))", parameterValues);
+
 		}catch(e){
 			alert(e);
 		}

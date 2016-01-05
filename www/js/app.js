@@ -35,7 +35,7 @@ myDictionaryModule.run(function($ionicPlatform, DB) {
   })
 
   .state('app.words', {
-    url: '/words',
+    url: '/words/:languageId',
     views: {
       'menuContent' : {
         templateUrl: 'Words/words_list.html',
@@ -48,8 +48,8 @@ myDictionaryModule.run(function($ionicPlatform, DB) {
     url: '/languages',
     views: {
       'menuContent' : {
-        templateUrl: 'Words/words_list.html',
-        controller: 'WordCtrl'
+        templateUrl: 'Language/language_list.html',
+        controller: 'LanguageCtrl'
       }
     }
   })
@@ -64,7 +64,7 @@ myDictionaryModule.run(function($ionicPlatform, DB) {
     }
   });
 
-  $urlRouterProvider.otherwise('/app/words');
+  $urlRouterProvider.otherwise('/app/words/1');
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout){

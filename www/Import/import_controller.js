@@ -5,20 +5,8 @@ myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $i
 	$scope.progressPercent = 0;
 	$scope.showProgressbar = false;
 	$scope.totalWordsImported = 0;
-
-	$scope.importWordsText = function(){
-		$http.get('Import/word_data.txt').success(function(rawData){
-			console.log(rawData);
-			insertTextData(rawData);
-		});
-	};
-
-	$scope.importWordsJSON = function(){
-		$http.get('Import/word_data.json').success(function(words){
-			insertJSONData(words);
-		});
-	};
-
+	$scope.serverUrl = "";
+	
 	function insertTextData(rawData){
 		var lines = rawData.split('\n');
 		var words = [];
@@ -53,6 +41,25 @@ myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $i
 				}
 			});
 		});
+	}
+
+	$scope.importWordsServer = function(jsonFile){
+		$scope.showProgressbar = true;
+		$scope.progressPercent = 0;
+		$scope.totalWordsImported = 0;
+
+		isJsonFile = jsonFile;
+
+		if(isJsonFile){
+			$http.get($scope.serverUrl).success(function(words){
+				insertJSONData(words);
+			});
+		}else{
+			$http.get($scope.serverUrl).success(function(rawData){
+				console.log(rawData);
+				insertData(rawData);
+			});
+		}
 	}
 
 	$scope.importWordsLocal = function(jsonFile){

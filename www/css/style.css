@@ -86,4 +86,46 @@ progress[value]::-webkit-progress-value {
     background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 
+.import-words-content input {
+	width: 100%;
+}
+
 /*-------- Import file end------*/
+
+/*-------- Language List -------*/
+.list-language-content .language-name {
+	width: 85%;
+	font-size: 20px;
+	padding-left: 16px;
+	box-sizing: border-box;
+}
+
+.list-language-content .language-name a {
+	display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+.list-language-content .language-edit {
+	width: 15%;
+	padding-right: 10px;
+	box-sizing: border-box;
+}
+
+.list-language-content .item-language {
+	padding: 0;
+}
+
+
+.list-language-content .language-edit button{
+	float: right;
+	font-size: 25px;
+}
+
+
+.list-language-content .language-item-content div {
+	display: inline-block;
+	vertical-align:middle;
+}
+
+/*-------- Language List End-------*/

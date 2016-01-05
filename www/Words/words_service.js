@@ -8,6 +8,14 @@ appService.factory('Word', function(DB, DictionaryDate){
 			   });
 	};
 
+	self.getWordsByLanguage = function(languageId){
+		var parameters = [languageId];
+		return DB.query("SELECT * FROM Word WHERE LanguageId = (?)", parameters)
+			   .then(function(result){
+			   		return DB.getAll(result);
+			   });
+	};
+
 	self.getByName = function(name){
 		var parameters = [name];
 
@@ -21,8 +29,8 @@ appService.factory('Word', function(DB, DictionaryDate){
 		var dateCreated = DictionaryDate.getCurrentDate(),
 			dateUpdated = dateCreated
 
-		var parameterValues = [word.Name, word.Meaning, word.Sentence, dateCreated, dateUpdated],
-			parameterNames = ['Name', 'Meaning', 'Sentence', 'DateCreated','DateUpdated'];
+		var parameterValues = [word.Name, word.Meaning, word.Sentence, word.LanguageId, dateCreated, dateUpdated],
+			parameterNames = ['Name', 'Meaning', 'Sentence', 'LanguageId' ,'DateCreated','DateUpdated'];
 
 		return DB.query(DB.getInsertString('Word', parameterNames), parameterValues);
 	
