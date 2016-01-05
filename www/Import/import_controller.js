@@ -1,4 +1,4 @@
-myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $ionicPlatform, $cordovaFile){
+myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $ionicPlatform, $cordovaFile, Language, $ionicModal){
 	var isJsonFile = true;
 	var importedWordsCount = 0;
 
@@ -6,16 +6,29 @@ myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $i
 	$scope.showProgressbar = false;
 	$scope.totalWordsImported = 0;
 	$scope.serverUrl = "";
-	
+	$scope.selectedLanguageId = 0;
+	$scope.selectedLanguage = "--Select Language--";
+	$scope.languages = [];
+
+	$scope.updateLanguages = function() {
+		Language.all().then(function(languages){
+			console.log(languages);
+			$scope.languages = languages;
+		});
+	};
+
+	$scope.updateLanguages();
+
 	function insertTextData(rawData){
 		var lines = rawData.split('\n');
 		var words = [];
 		console.log(lines);
+
 		for(var line = 0; line < lines.length; line += 3){
 	      if((lines[line]).length <= 1){
 	      	line++;
 	      }
-	      words.push({ "Name": lines[line], "Meaning": lines[line+1], "Sentence": lines[line+2]});
+	      words.push({ "Name": lines[line], "Meaning": lines[line+1], "Sentence": lines[line+2], "LanguageId": $scope.selectedLanguageId});
 	    }
 	    console.log(words);
 		insertData(words);
@@ -27,6 +40,7 @@ myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $i
 		angular.forEach(words, function(word){
 			Word.getByName(word.Name).then(function(result){
 				if(!result){
+					word.LanguageId = $scope.selectedLanguageId;
 					Word.add(word).then(function(result){
 						count++;
 
@@ -105,5 +119,30 @@ myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $i
 		console.log("FileSystem Error");
 		console.log(error);
 	}
+
+	$ionicModal.fromTemplateUrl('Language/language_list_modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.languagesModal = modal;
+    });
+
+    $scope.openLanguagesModal = function() {
+      $scope.languagesModal.show();
+    };
+
+    $scope.closeLanguagesModal = function() {
+      $scope.languagesModal.hide();
+    };
+
+    $scope.$on('$destroy', function() {
+      $scope.languagesModal.remove();
+    });
+    
+    $scope.selectLanguage= function(language) {
+      $scope.selectedLanguageId = language.Id;
+      $scope.selectedLanguage = language.Name;
+      $scope.closeLanguagesModal();
+    }
 
 });

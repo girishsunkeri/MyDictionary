@@ -1,0 +1,13 @@
+<ion-modal-view>
+	<ion-header-bar>
+		<h1 class="title">Choose Language</h1>
+		<div class="buttons">
+			<a ng-click="closeLanguagesModal()" class="button button-icon icon ion-close"></a>
+		</div>
+	</ion-header-bar>
+  	<ion-content>
+    	<ul class="list">
+      		<li class="item" ng-click="selectLanguage(language)" ng-repeat="language in languages">{{language.Name}}</li>
+    	</ul>
+  </ion-content>
+</ion-modal-view>

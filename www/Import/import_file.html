@@ -9,6 +9,7 @@
 				<button class="button button-positive button-block" ng-click="importWordsServer(false)">Import From Server(Text)</button>
 				<button class="button button-positive button-block" ng-click="importWordsServer(true)">Import From Server(JSON)</button>
 				<input type="text" ng-model="serverUrl" placeholder="Server URL" autofocus>
+				<button class="button button-positive button-block" ng-click="openLanguagesModal()">{{ selectedLanguage }}</button>
 				<progress max="100" value="{{progressPercent}}"></progress>
 				<label ng-if="totalWordsImported"><span>Total {{ totalWordsImported }} words imported</span></label>
 			</ion-item>

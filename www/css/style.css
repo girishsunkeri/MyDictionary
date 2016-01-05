@@ -88,6 +88,7 @@ progress[value]::-webkit-progress-value {
 
 .import-words-content input {
 	width: 100%;
+	border: 1px solid #DCDCDC;
 }
 
 /*-------- Import file end------*/

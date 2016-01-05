@@ -33,5 +33,14 @@ appService.factory('Language', function(DB, DictionaryDate){
 		return DB.query(DB.getDeleteString('LanguageId', 'Id'), parameterValues);
 	};
 
+	self.getByName = function(name){
+		var parameters = [name];
+
+		return DB.query("SELECT Id FROM Language WHERE Name = (?)", parameters)
+			.then(function(result){
+				return DB.getById(result);
+			});
+	};
+
 	return self;
 });
