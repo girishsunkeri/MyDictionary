@@ -5,7 +5,7 @@ myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $i
 	$scope.progressPercent = 0;
 	$scope.showProgressbar = false;
 	$scope.totalWordsImported = 0;
-	$scope.serverUrl = "";
+	$scope.server = { url: ""};
 	$scope.selectedLanguageId = 0;
 	$scope.selectedLanguage = "--Select Language--";
 	$scope.languages = [];
@@ -65,13 +65,13 @@ myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $i
 		isJsonFile = jsonFile;
 
 		if(isJsonFile){
-			$http.get($scope.serverUrl).success(function(words){
-				insertJSONData(words);
+			$http.get($scope.server.url).success(function(words){
+				insertData(words);
 			});
 		}else{
-			$http.get($scope.serverUrl).success(function(rawData){
+			$http.get($scope.server.url).success(function(rawData){
 				console.log(rawData);
-				insertData(rawData);
+				insertTextData(rawData);
 			});
 		}
 	}
