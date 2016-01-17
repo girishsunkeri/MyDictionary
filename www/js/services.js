@@ -28,7 +28,22 @@ appService.factory('DB', function($q, DB_CONFIG, $cordovaSQLite, $ionicPlatform,
 				dateUpdated = dateCreated,
 				parameterValues = ['English', dateCreated, dateUpdated, 'English'];
 
-			self.query("INSERT INTO Language (Name, DateCreated, DateUpdated) SELECT (?),(?),(?) WHERE NOT EXISTS(SELECT 1 FROM Language WHERE Name = (?))", parameterValues);
+			self.query("INSERT INTO Language (Name, DateCreated, DateUpdated) SELECT (?),(?),(?) WHERE NOT EXISTS(SELECT 1 FROM Language WHERE Name = (?))", parameterValues).then(function(){
+				parameterValues = ['English'];
+				self.query("SELECT * FROM Language WHERE Name = (?)", parameterValues).then(function(result){
+					var resultJson = self.getById(result),
+						defaultLanguageId = resultJson.Id;
+
+					console.log("defaultLanguageId");
+					console.log(defaultLanguageId);
+					parameterValues = ['DefaultLanguage', defaultLanguageId, dateCreated, dateUpdated, 'DefaultLanguage'];
+					self.query("INSERT INTO Setting (SettingName, SettingValue, DateCreated, DateUpdated) SELECT (?),(?),(?),(?) WHERE NOT EXISTS(SELECT 1 FROM Setting WHERE SettingName = (?))", parameterValues);
+					
+				});
+			});
+
+			parameterValues = ['DefaultUrl', 'www.google.com', dateCreated, dateUpdated, 'DefaultUrl'];
+			self.query("INSERT INTO Setting (SettingName, SettingValue, DateCreated, DateUpdated) SELECT (?),(?),(?),(?) WHERE NOT EXISTS(SELECT 1 FROM Setting WHERE SettingName = (?))", parameterValues);
 
 		}catch(e){
 			alert(e);
@@ -71,6 +86,8 @@ appService.factory('DB', function($q, DB_CONFIG, $cordovaSQLite, $ionicPlatform,
 
 	// Proces a single result
 	self.getById = function(result) {
+		console.log("inside getById");
+		console.log(result);
 		var output = null;
 
 		if(result.rows.length <= 0)
@@ -95,6 +112,24 @@ appService.factory('DB', function($q, DB_CONFIG, $cordovaSQLite, $ionicPlatform,
 
 	self.getUpdateString = function(tableName, columns, baseParameter){
 		return "UPDATE " + tableName + " SET " + columns.join(" = (?),") + " = (?) WHERE " + baseParameter + " = (?)";
+	};
+
+	self.getSelectString = function(tableName, columns, baseParameter){
+
+		var selectString = "SELECT ";
+		if(columns != "*"){
+			selectString += columns.join();
+		}else{
+			selectString += "*";
+		}
+
+		selectString += " FROM " + tableName;
+
+		if(baseParameter){
+			selectString += " WHERE " + baseParameter + " = (?)";
+		}
+
+		return selectString;
 	};
 
 	return self;

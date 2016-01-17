@@ -12,7 +12,7 @@ angular.module('MyDictionary.config', [])
 				{ name: 'Sentence', type: 'text'},
 				{ name: 'LanguageId', type: 'integer'},
 				{ name: 'DateCreated', type: 'text'},
-				{ name: 'DateUpdated', type: 'text'},
+				{ name: 'DateUpdated', type: 'text'}
 			]
 		},
 		{
@@ -21,7 +21,17 @@ angular.module('MyDictionary.config', [])
 				{ name: 'Id', type: 'integer primary key' },
 				{ name: 'Name', type: 'text'},
 				{ name: 'DateCreated', type: 'text'},
-				{ name: 'DateUpdated', type: 'text'},
+				{ name: 'DateUpdated', type: 'text'}
+			]
+		},
+		{
+			name: 'Setting',
+			columns: [
+				{ name: 'Id', type: 'integer primary key' },
+				{ name: 'SettingName', type: 'text'},
+				{ name: 'SettingValue', type: 'text'},
+				{ name: 'DateCreated', type: 'text'},
+				{ name: 'DateUpdated', type: 'text'}
 			]
 		}
 	]

@@ -130,3 +130,25 @@ progress[value]::-webkit-progress-value {
 }
 
 /*-------- Language List End-------*/
+
+/*-------- Settings ----------- */
+.settings .icon-right::before {
+	padding-top: 3px;
+}
+
+.settings button {
+	float: right;
+}
+
+.settings span {
+	font-size: 17px;
+}
+
+.default-url textarea {
+	border: 1px solid #CCC5C5;
+	width: 100%;
+	min-height: 50px;
+}
+
+
+/*-------- Settings End----------- */

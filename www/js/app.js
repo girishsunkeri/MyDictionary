@@ -54,6 +54,16 @@ myDictionaryModule.run(function($ionicPlatform, DB) {
     }
   })
 
+  .state('app.settings', {
+    url: '/settings',
+    views: {
+      'menuContent' : {
+        templateUrl: 'Settings/settings.html',
+        controller: 'SettingCtrl'
+      }
+    }
+  })
+
   .state('app.importFile', {
     url: '/importFile',
     views: {
@@ -64,7 +74,7 @@ myDictionaryModule.run(function($ionicPlatform, DB) {
     }
   });
 
-  $urlRouterProvider.otherwise('/app/words/1');
+  $urlRouterProvider.otherwise('/app/words/0');
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout){

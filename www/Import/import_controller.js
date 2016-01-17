@@ -67,11 +67,15 @@ myDictionaryModule.controller('ImportFileCtrl', function($scope, $http, Word, $i
 		if(isJsonFile){
 			$http.get($scope.server.url).success(function(words){
 				insertData(words);
+			}).error(function(result){
+				console.log(result);
 			});
 		}else{
-			$http.get($scope.server.url).success(function(rawData){
+			$http.get("https://dl.dropboxusercontent.com/s/k1k93wz0x7y1482/word_data.txt?dl=0").success(function(rawData){
 				console.log(rawData);
 				insertTextData(rawData);
+			}).error(function(result){
+				console.log(result);
 			});
 		}
 	}

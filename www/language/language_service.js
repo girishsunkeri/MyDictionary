@@ -42,5 +42,14 @@ appService.factory('Language', function(DB, DictionaryDate){
 			});
 	};
 
+	self.getById = function(id){
+		var parameters = [id];
+
+		return DB.query("SELECT * FROM Language WHERE Id = (?)", parameters)
+			.then(function(result){
+				return DB.getById(result);
+			});
+	};
+
 	return self;
 });

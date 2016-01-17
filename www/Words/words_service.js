@@ -27,7 +27,7 @@ appService.factory('Word', function(DB, DictionaryDate){
 
 	self.add = function(word){
 		var dateCreated = DictionaryDate.getCurrentDate(),
-			dateUpdated = dateCreated
+			dateUpdated = dateCreated;
 
 		var parameterValues = [word.Name, word.Meaning, word.Sentence, word.LanguageId, dateCreated, dateUpdated],
 			parameterNames = ['Name', 'Meaning', 'Sentence', 'LanguageId' ,'DateCreated','DateUpdated'];

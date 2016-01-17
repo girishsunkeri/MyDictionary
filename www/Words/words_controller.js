@@ -1,22 +1,39 @@
-myDictionaryModule.controller('WordCtrl', function($scope, Word, $ionicModal, $timeout, $ionicActionSheet, $ionicPopup, $stateParams){
+myDictionaryModule.controller('WordCtrl', function($scope, Word, $ionicModal, $timeout, $ionicActionSheet, $ionicPopup, $stateParams, Setting){
 
 	$scope.words = [];
+	$scope.currentLanguageId = 1;
 
 
 	/*------- Basic Crud operations --------*/
 
 	// Will fetch words from DB and update the view.
-	$scope.updateWords = function() {
-		Word.getWordsByLanguage($stateParams.languageId).then(function(words){
+
+	function getWordsByLanguageId(LanguageId){
+		Word.getWordsByLanguage(LanguageId).then(function(words){
 			$scope.words = words;
 		});
+	}
+
+
+	$scope.updateWords = function() {
+
+		if(parseInt($stateParams.languageId)){
+			$scope.currentLanguageId = $stateParams.languageId
+			getWordsByLanguageId($scope.currentLanguageId);
+		}else{
+			Setting.getByName('DefaultLanguage').then(function(result){
+				console.log("Fetching words for " + result.SettingValue);
+				$scope.currentLanguageId = parseInt(result.SettingValue);
+				getWordsByLanguageId($scope.currentLanguageId);
+			});
+		}
 	};
 
 	// Will perform add or edit based on $scope.addAction parameter
 	$scope.addOrEditWord = function(){
 		console.log("Adding/Editing word")
 		
-		$scope.word.LanguageId = $stateParams.languageId;
+		$scope.word.LanguageId = $scope.currentLanguageId;
 		if($scope.addAction){
 			Word.add($scope.word).then(function(){
 				console.log("Word added");

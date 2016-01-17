@@ -1,0 +1,23 @@
+<ion-view view-title="Settings">
+	<ion-nav-buttons side="right">
+		<button class="button button-icon ion-checkmark" ng-click="saveSettings()">
+		</button>
+	</ion-nav-buttons>
+	<ion-content>
+		<ion-list class="settings">
+			<ion-item class="default-language">
+				<label class="button button-clear button-dark">
+					<span>Language</span>
+				</label>
+					<button class="button button-clear button-dark ion-android-arrow-dropdown icon-right" ng-click="openLanguagesModal()" ng-bind="defaultLanguage.SettingValueText"></button>
+			</ion-item>
+			<ion-item class="default-url">
+				<label class="button button-clear button-dark">
+					<span>Url</span>
+				</label>
+
+				<textarea placeholder="Url" rows="1" ng-model="defaultUrl.SettingValue" ng-Required="true" name="description"></textarea>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>
